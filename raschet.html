@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    td select,
+    td input {
+      width: 150px;
+    }
+
+    #diagram td {
+      vertical-align: bottom;
+      text-align: center;
+      padding: 10px;
+      
+    }
+    #diagram th, #diagram {
+        border: 1px solid black;
+        white-space: nowrap;
+        border-collapse: collapse;
+        
+    }
+    #diagram th{
+        width:120px;
+    }
+
+    #diagram div {
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  Калькулятор негров.
+
+  <form name="calculator">
+    <table id="calcul">
+        <tr>
+            <td>Инспектор</td>
+            <td>
+              <input name="inspect" type="number" value="1" required>
+            </td>
+          </tr>
+        <tr>
+        <td>Количество негров</td>
+        <td>
+          <input name="money" type="number" value="16" required>
+        </td>
+      </tr>
+      <tr>
+        <td>Количество дней</td>
+        <td>
+            <input name="months" type="number" value="40" required>
+        </td>
+      </tr>
+      <tr>
+        <td>Сумма на человека в евро</td>
+        <td>
+          <input name="interest" type="number" value="6.5" required>
+        </td>
+      </tr>
+    </table>
+
+
+  </form>
+
+
+  <table id="diagram">
+    <tr>
+      <th>Сигареты Fast</th>
+      <th>Сигареты Malboro</th>
+      <th>Продукты</th>
+      <th>Сок</th>
+    </tr>
+    <tr>
+      <th id="money-before"></th>
+      <th id="money-before2"></th>
+      <th id="money-after"></th>
+      <th id="money-after2"></th>
+    </tr>
+ <!--   <td>
+      <div style="background: red;width:40px;height:100px"></div>
+    </td>
+    <td>
+      <div style="background: green;width:40px;height:0" id="height-after"></div>
+    </td>-->
+  </table>
+
+  <script>
+
+    let form = document.forms.calculator;
+    form.inspect.oninput = calculate;
+    form.money.oninput = calculate;
+    form.months.oninput = calculate;
+    form.interest.oninput = calculate;
+
+    function calculate() {
+      let inspect = +form.inspect.value;
+      if(!inspect) return;
+      let blackMan = +form.money.value;
+      if (!blackMan) return;
+
+      let sumOnnegr = +form.interest.value;
+
+      if (!sumOnnegr) return;
+
+      let days = +form.months.value;
+      if (!days) return;
+
+      let sigaFast = blackMan*days;
+      let inspectMalboro = inspect*days;
+      let prod = days*sumOnnegr*(blackMan+inspect);
+      let juice = (blackMan+inspect)*days*0.3;
+      document.getElementById('money-before').innerHTML = 'Пачек: '+sigaFast;
+      document.getElementById('money-before2').innerHTML = 'Пачек: '+ inspectMalboro;
+      document.getElementById('money-after').innerHTML = 'Евро: '+prod;
+      document.getElementById('money-after2').innerHTML = juice+' л';
+     
+    }
+
+    calculate();
+  </script>
+
+
+</body>
+</html>
